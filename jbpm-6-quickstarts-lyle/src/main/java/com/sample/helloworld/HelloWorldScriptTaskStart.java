@@ -1,6 +1,4 @@
-package com.sample;
-
-import java.util.List;
+package com.sample.helloworld;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,38 +12,20 @@ import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.manager.RuntimeManagerFactory;
-import org.kie.api.task.TaskService;
-import org.kie.api.task.model.TaskSummary;
 
-public class ProcessMain {
+public class HelloWorldScriptTaskStart {
 
 	public static void main(String[] args) {
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks.getKieClasspathContainer();
-		KieBase kbase = kContainer.getKieBase("kbase");
+		KieBase kbase = kContainer.getKieBase("kbase-helloworld");
 
 		RuntimeManager manager = createRuntimeManager(kbase);
 		RuntimeEngine engine = manager.getRuntimeEngine(null);
 		KieSession ksession = engine.getKieSession();
-		TaskService taskService = engine.getTaskService();
+		
+		ksession.startProcess("org.jbpm.quickstarts.helloworldScript");
 
-		ksession.startProcess("com.sample.bpmn.hello");
-
-		// let john execute Task 1
-		List<TaskSummary> list = taskService.getTasksAssignedAsPotentialOwner("john", "en-UK");
-		TaskSummary task = list.get(0);
-		System.out.println("John is executing task " + task.getName());
-		taskService.start(task.getId(), "john");
-		taskService.complete(task.getId(), "john", null);
-
-		// let mary execute Task 2
-		list = taskService.getTasksAssignedAsPotentialOwner("mary", "en-UK");
-		task = list.get(0);
-		System.out.println("Mary is executing task " + task.getName());
-		taskService.start(task.getId(), "mary");
-		taskService.complete(task.getId(), "mary", null);
-
-		manager.disposeRuntimeEngine(engine);
 		System.exit(0);
 	}
 
