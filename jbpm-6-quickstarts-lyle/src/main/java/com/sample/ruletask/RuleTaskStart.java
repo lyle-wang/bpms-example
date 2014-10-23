@@ -21,6 +21,7 @@ public class RuleTaskStart {
     }
 
     private static void invoke_one() {
+        System.out.println("Start invoke_one...");
         KnowledgeBase kbase = readKnowledgeBase(
                 "com/sample/ruletask/ruletaskprocess-rule.drl",
                 "com/sample/ruletask/ruletaskprocess.bpmn");
@@ -29,22 +30,19 @@ public class RuleTaskStart {
         ksession.startProcess("org.jbpm.quickstarts.ruletaskprocess");
         ksession.fireAllRules();
         ksession.dispose();
+        System.out.println("Finish invoke_one...");
     }
 
-    private static KnowledgeBase readKnowledgeBase(String drl,
-            String... process) {
+    private static KnowledgeBase readKnowledgeBase(String drl, String... process) {
 
-        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
-                .newKnowledgeBuilder();
+        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
         for (String p : process) {
-            kbuilder.add(ResourceFactory.newClassPathResource(p),
-                    ResourceType.BPMN2);
+            kbuilder.add(ResourceFactory.newClassPathResource(p), ResourceType.BPMN2);
         }
 
         if (drl != null) {
-            kbuilder.add(ResourceFactory.newClassPathResource(drl),
-                    ResourceType.DRL);
+            kbuilder.add(ResourceFactory.newClassPathResource(drl), ResourceType.DRL);
         }
 
         if (kbuilder.hasErrors()) {
@@ -57,6 +55,8 @@ public class RuleTaskStart {
     }
 
     private static void invoke_two() {
+        
+        System.out.println("Start invoke_two...");
         KieServices ks = KieServices.Factory.get();
         KieContainer kcontainer = ks.getKieClasspathContainer();
 
@@ -68,6 +68,8 @@ public class RuleTaskStart {
         ksession.startProcess("org.jbpm.quickstarts.ruletaskprocess");
 
         ksession.fireAllRules();
+        
         ksession.dispose();
+        System.out.println("Finish invoke_two...");
     }
 }

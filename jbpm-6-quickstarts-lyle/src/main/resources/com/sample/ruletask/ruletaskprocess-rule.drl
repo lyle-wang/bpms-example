@@ -1,4 +1,4 @@
-package com.sample;
+package com.sample.ruletask;
 
 rule "Hello World Rule" ruleflow-group "Print"
 when

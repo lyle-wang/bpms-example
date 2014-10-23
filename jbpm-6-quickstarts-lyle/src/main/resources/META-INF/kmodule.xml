@@ -10,5 +10,7 @@
   	<ksession name="default-session" type="stateful" default="true" />
   </kbase>
   
+  <kbase name="kbase-gateway" packages="com.sample.gateway" />
+  
   
 </kmodule>
