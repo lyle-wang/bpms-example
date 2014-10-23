@@ -1,0 +1,8 @@
+package com.sample.ruletask;
+
+rule "Hello World Rule" ruleflow-group "Print"
+when
+	eval( true )
+then
+	System.out.println("Hello World Rule - From jBPM 6");
+end
