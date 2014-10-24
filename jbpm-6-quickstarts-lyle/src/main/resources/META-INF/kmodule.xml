@@ -11,6 +11,8 @@
   </kbase>
   
   <kbase name="kbase-gateway" packages="com.sample.gateway" />
+  <kbase name="kbase-subprocess" packages="com.sample.subprocess" />
+  <kbase name="kbase-errorhandling" packages="com.sample.errorhandling" />
   
   
 </kmodule>
