@@ -38,7 +38,7 @@ public class GateWayTestAgeIncome {
         params.put("person", objLyle);
          
         // start a new process instance
-        ProcessInstance processInstance = (ProcessInstance) ksession.startProcess("com.sample.gateway.exclusive.testageincome",params);
+        ProcessInstance processInstance = (ProcessInstance) ksession.startProcess("com.sample.gateway.parallel.testageincome",params);
         
         
         // Get variables back
