@@ -1,6 +1,5 @@
-package com.sample.gateway;
+package com.sample.errorhandling;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,41 +11,41 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-public class GateWayTestAge {
+public class RuntimeErrorTest {
 
     public static void main(String[] args) {
         
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
-        KieBase kieBase = kContainer.getKieBase("kbase-gateway");
+        KieBase kieBase = kContainer.getKieBase("kbase-errorhandling");
         KieSession ksession = kieBase.newKieSession();
         
-        Person objLyle = new Person();
-        objLyle.setId("001");
-        
-        // Note the "Priority" setup on the gateway in "gateway-exclusive-testage.bpmn"
-        // change this age value and test again
-        objLyle.setAge(10);
-        objLyle.setName("Lyle");
-        objLyle.setIncome(new BigDecimal(50000.00d));
-        objLyle.setProcessedBy("");
-        
+        Booking objBooking = new Booking();
+        objBooking.setGuestNumber(6);
+        objBooking.setId("001");
+                
         // pass in parameter
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("person", objLyle);
+        params.put("booking", objBooking);
+        params.put("ex_process", null);
          
         // start a new process instance
-        ProcessInstance processInstance = (ProcessInstance) ksession.startProcess("com.sample.gateway.exclusive.testage",params);
-        
+        ProcessInstance processInstance = (ProcessInstance) ksession.startProcess("com.sample.errorhandling.parent",params);
         
         // Get variables back
         VariableScopeInstance variableScope = (VariableScopeInstance) processInstance.getContextInstance(VariableScope.VARIABLE_SCOPE);
 
         Map<String, Object> variables = variableScope.getVariables();
-        Person objAfterProcess = (Person) variables.get("person");
+        Booking rtnBooking = (Booking) variables.get("booking");
         
-        System.out.print("From client code, Processed by: "+objAfterProcess.getProcessedBy());
-        
+        // See if we could fetch the exception thrown from process
+        RuntimeException exDuringProcess = (RuntimeException) variables.get("ex_process");
+        if (null == exDuringProcess) {
+            System.out.println("Bedroom Numbers::"+rtnBooking.getBedrmNumber());
+        } else {
+            System.out.println("Caught Exception in process:"+exDuringProcess.getMessage());
+            exDuringProcess.printStackTrace();
+        }
         
         ksession.dispose();
         System.exit(0);
