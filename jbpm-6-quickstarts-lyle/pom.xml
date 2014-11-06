@@ -36,6 +36,12 @@
   <dependencies>
     <dependency>
       <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-workitems</artifactId>
+      <version>${jbpm.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.jbpm</groupId>
       <artifactId>jbpm-test</artifactId>
       <version>${jbpm.version}</version>
     </dependency>

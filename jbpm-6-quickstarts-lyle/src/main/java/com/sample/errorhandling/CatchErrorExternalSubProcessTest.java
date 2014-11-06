@@ -31,6 +31,9 @@ public class CatchErrorExternalSubProcessTest {
         
         
         // start a new process instance
+        // We will get a NullPointerException here because of this bug: 
+        // https://issues.jboss.org/browse/JBPM-4494
+        // This is fixed in jBPM 6.x community version
         ProcessInstance processInstance = (ProcessInstance) ksession.startProcess("com.sample.errorhandling.parent",params);
         
         // Get variables back
