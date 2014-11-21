@@ -13,6 +13,9 @@
   <kbase name="kbase-gateway" packages="com.sample.gateway" />
   <kbase name="kbase-subprocess" packages="com.sample.subprocess" />
   <kbase name="kbase-errorhandling" packages="com.sample.errorhandling" />
+  <kbase name="kbase-looping" packages="com.sample.looping" />
+  
+  
   
   <kbase name="kbase-servicetask" packages="com.sample.servicetask" >
     <ksession name="defaultKieSession" type="stateful" default="true" clockType="realtime">

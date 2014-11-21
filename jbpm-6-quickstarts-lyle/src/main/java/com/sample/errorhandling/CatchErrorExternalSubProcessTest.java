@@ -27,7 +27,7 @@ public class CatchErrorExternalSubProcessTest {
         // pass in parameter
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("booking", objBooking);
-        params.put("ex", new RuntimeException("Testing outside"));
+//        params.put("ex", new RuntimeException("Testing outside"));
         
         
         // start a new process instance
