@@ -1,4 +1,4 @@
-package com.sample.remotemaven;
+package com.sample.remoteintegration.remotemaven;
 
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
@@ -13,7 +13,7 @@ public class RemoteMavenIntegrationTest {
        
         // Please follow this solution article :   https://access.redhat.com/solutions/710763
         // Before running this test, please install your remote BRMS/BPMS server and create/deploy project with G:A="com.sample":"TestProj"
-        // "helloworldScriptTask.bpmn" is used for testing (upload it to remote BPMS project)
+        // "resources/helloworldScriptTask.bpmn" is used for testing (upload it to remote BPMS project)
         
         loadWithReleaseId();
 
