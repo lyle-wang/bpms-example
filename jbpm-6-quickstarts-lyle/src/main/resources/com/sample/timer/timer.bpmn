@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmn20="http://www.omg.org/bpmn20" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="_ks8MYHwuEeSV4a6jDh66Vw" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_ItemDefinition_3" structureRef="java.text.SimpleDateFormat"/>
+  <bpmn2:itemDefinition id="_ItemDefinition_5" structureRef="java.util.Calendar"/>
+  <bpmn2:process id="com.sample.quickstart.timer" drools:version="1.0" drools:packageName="com.sample.timer" drools:adHoc="false" name="TimerProcess" isExecutable="true">
+    <bpmn2:extensionElements>
+      <drools:import name="java.text.SimpleDateFormat"/>
+      <drools:import name="java.util.Calendar"/>
+    </bpmn2:extensionElements>
+    <bpmn2:startEvent id="_C424FAAD-605A-426E-A7BD-9CA7BAA0C12F" drools:bgcolor="#9acd32" drools:selectable="true" name="">
+      <bpmn2:outgoing>bpmn20:_173BB10A-4809-49E3-B742-DAB51D0E74F4</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="_ks8MYXwuEeSV4a6jDh66Vw">
+        <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="_ks8MYnwuEeSV4a6jDh66Vw">*/20 * * * * ? *</bpmn2:timeCycle>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="_0CBA4F61-6F14-4CE9-ACAC-4CD46F559A3A" drools:selectable="true" name="ScriptTask1" isForCompensation="true" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>bpmn20:_173BB10A-4809-49E3-B742-DAB51D0E74F4</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_DAB3A30C-5603-4F72-9FA0-0F1C89EA933F</bpmn2:outgoing>
+      <bpmn2:script>        Calendar calNow = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(&quot;dd-MMM-yyyy HH:mm:ss&quot;);
+        String txtDate = format.format(calNow.getTime());
+
+        System.out.println(&quot;Executing Task-1 Now:==&quot;+txtDate+&quot;==&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:intermediateCatchEvent id="_092428F3-EB3D-48F9-BB8E-5EF3811B266B" drools:bgcolor="#f5deb3" drools:selectable="true" drools:bordercolor="#a0522d" drools:boundaryca="false" name="">
+      <bpmn2:incoming>bpmn20:_DAB3A30C-5603-4F72-9FA0-0F1C89EA933F</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_7E973E4A-F815-42B5-B4B3-B45F60DC669D</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="_ks8MY3wuEeSV4a6jDh66Vw">
+        <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="_ks8MZHwuEeSV4a6jDh66Vw">10s</bpmn2:timeCycle>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:sequenceFlow id="_173BB10A-4809-49E3-B742-DAB51D0E74F4" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_C424FAAD-605A-426E-A7BD-9CA7BAA0C12F" targetRef="_0CBA4F61-6F14-4CE9-ACAC-4CD46F559A3A"/>
+    <bpmn2:sequenceFlow id="_DAB3A30C-5603-4F72-9FA0-0F1C89EA933F" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_0CBA4F61-6F14-4CE9-ACAC-4CD46F559A3A" targetRef="_092428F3-EB3D-48F9-BB8E-5EF3811B266B"/>
+    <bpmn2:scriptTask id="_43C93170-8A85-48E1-88D1-960DFCF0D687" drools:selectable="true" name="ScriptTask2" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>bpmn20:_7E973E4A-F815-42B5-B4B3-B45F60DC669D</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_2A8660A9-E431-45FB-9B2A-633364DFB76E</bpmn2:outgoing>
+      <bpmn2:script>        Calendar calNow = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(&quot;dd-MMM-yyyy HH:mm:ss&quot;);
+        String txtDate = format.format(calNow.getTime());
+
+        System.out.println(&quot;Executing Task-2 Now:==&quot;+txtDate+&quot;==&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_7E973E4A-F815-42B5-B4B3-B45F60DC669D" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_092428F3-EB3D-48F9-BB8E-5EF3811B266B" targetRef="_43C93170-8A85-48E1-88D1-960DFCF0D687"/>
+    <bpmn2:endEvent id="_CE0CF464-876B-4E12-8DB3-8EB5D3EA21DC" drools:bgcolor="#ff6347" drools:selectable="true" name="">
+      <bpmn2:incoming>bpmn20:_2A8660A9-E431-45FB-9B2A-633364DFB76E</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="_ks8MZXwuEeSV4a6jDh66Vw"/>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="_2A8660A9-E431-45FB-9B2A-633364DFB76E" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_43C93170-8A85-48E1-88D1-960DFCF0D687" targetRef="_CE0CF464-876B-4E12-8DB3-8EB5D3EA21DC"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_ks8MZnwuEeSV4a6jDh66Vw">
+    <bpmndi:BPMNPlane id="_ks8MZ3wuEeSV4a6jDh66Vw" bpmnElement="com.sample.quickstart.timer">
+      <bpmndi:BPMNShape id="_ks8MaHwuEeSV4a6jDh66Vw" bpmnElement="_C424FAAD-605A-426E-A7BD-9CA7BAA0C12F">
+        <dc:Bounds height="30.0" width="30.0" x="98.0" y="132.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_ks8MaXwuEeSV4a6jDh66Vw" bpmnElement="_0CBA4F61-6F14-4CE9-ACAC-4CD46F559A3A">
+        <dc:Bounds height="80.0" width="100.0" x="200.0" y="106.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_ks8ManwuEeSV4a6jDh66Vw" bpmnElement="_092428F3-EB3D-48F9-BB8E-5EF3811B266B">
+        <dc:Bounds height="30.0" width="30.0" x="390.0" y="131.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_ks8MbXwuEeSV4a6jDh66Vw" bpmnElement="_43C93170-8A85-48E1-88D1-960DFCF0D687">
+        <dc:Bounds height="80.0" width="100.0" x="495.0" y="107.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_ks8Mb3wuEeSV4a6jDh66Vw" bpmnElement="_CE0CF464-876B-4E12-8DB3-8EB5D3EA21DC">
+        <dc:Bounds height="28.0" width="28.0" x="734.0" y="132.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_ks8Ma3wuEeSV4a6jDh66Vw" bpmnElement="_173BB10A-4809-49E3-B742-DAB51D0E74F4" sourceElement="_ks8MaHwuEeSV4a6jDh66Vw" targetElement="_ks8MaXwuEeSV4a6jDh66Vw">
+        <di:waypoint xsi:type="dc:Point" x="113.0" y="147.0"/>
+        <di:waypoint xsi:type="dc:Point" x="164.0" y="147.0"/>
+        <di:waypoint xsi:type="dc:Point" x="164.0" y="146.0"/>
+        <di:waypoint xsi:type="dc:Point" x="250.0" y="146.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_ks8MbHwuEeSV4a6jDh66Vw" bpmnElement="_DAB3A30C-5603-4F72-9FA0-0F1C89EA933F" sourceElement="_ks8MaXwuEeSV4a6jDh66Vw" targetElement="_ks8ManwuEeSV4a6jDh66Vw">
+        <di:waypoint xsi:type="dc:Point" x="250.0" y="146.0"/>
+        <di:waypoint xsi:type="dc:Point" x="405.0" y="146.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_ks8MbnwuEeSV4a6jDh66Vw" bpmnElement="_7E973E4A-F815-42B5-B4B3-B45F60DC669D" sourceElement="_ks8ManwuEeSV4a6jDh66Vw" targetElement="_ks8MbXwuEeSV4a6jDh66Vw">
+        <di:waypoint xsi:type="dc:Point" x="405.0" y="146.0"/>
+        <di:waypoint xsi:type="dc:Point" x="457.0" y="146.0"/>
+        <di:waypoint xsi:type="dc:Point" x="457.0" y="147.0"/>
+        <di:waypoint xsi:type="dc:Point" x="545.0" y="147.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_ks8McHwuEeSV4a6jDh66Vw" bpmnElement="_2A8660A9-E431-45FB-9B2A-633364DFB76E" sourceElement="_ks8MbXwuEeSV4a6jDh66Vw" targetElement="_ks8Mb3wuEeSV4a6jDh66Vw">
+        <di:waypoint xsi:type="dc:Point" x="545.0" y="147.0"/>
+        <di:waypoint xsi:type="dc:Point" x="748.0" y="146.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

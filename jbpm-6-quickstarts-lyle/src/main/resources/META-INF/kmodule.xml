@@ -14,6 +14,7 @@
   <kbase name="kbase-subprocess" packages="com.sample.subprocess" />
   <kbase name="kbase-errorhandling" packages="com.sample.errorhandling" />
   <kbase name="kbase-looping" packages="com.sample.looping" />
+  <kbase name="kbase-timer" packages="com.sample.timer" />
   
   
   

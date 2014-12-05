@@ -39,8 +39,6 @@ public class RemoteRuntimeEngineAPI {
             RemoteRuntimeEngine engine = factory.newRuntimeEngine();
             
             
-            
-            
             // Use TaskService to get Task
             // The TaskService class allows we to access the server tasks
             TaskService taskService = engine.getTaskService();
