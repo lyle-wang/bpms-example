@@ -19,11 +19,7 @@
   
   
   <kbase name="kbase-servicetask" packages="com.sample.servicetask" >
-    <ksession name="defaultKieSession" type="stateful" default="true" clockType="realtime">
-      <workItemHandlers>
-        <workItemHandler type="new org.jbpm.process.workitem.webservice.WebServiceWorkItemHandler(ksession, runtimeManager.getEnvironment().getClassLoader())" name="WebService"/>
-      </workItemHandlers>
-    </ksession>
+    <ksession name="defaultWSKieSession" type="stateful" default="true" clockType="realtime" />
   </kbase>
   
   

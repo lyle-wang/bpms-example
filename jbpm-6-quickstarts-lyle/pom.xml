@@ -17,6 +17,7 @@
 		<resteasy.version>2.3.6.Final-redhat-1</resteasy.version>
 		<remotenaming.version>1.0.7.Final-redhat-1</remotenaming.version>
 		<xnio.version>3.0.7.GA-redhat-1</xnio.version>
+		<woodstox.version>4.2.0-redhat-2</woodstox.version>
 	</properties>
 
 	<repositories>
@@ -37,6 +38,14 @@
 	</repositories>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>woodstox-core-asl</artifactId>
+			<version>${woodstox.version}</version>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-workitems</artifactId>
@@ -75,7 +84,11 @@
 			<version>${jbpm.version}</version>
 		</dependency>
 		
-		
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-workitems</artifactId>
+			<version>${jbpm.version}</version>
+		</dependency>
 		
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
