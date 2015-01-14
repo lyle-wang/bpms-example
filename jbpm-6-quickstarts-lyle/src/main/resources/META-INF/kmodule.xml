@@ -15,7 +15,7 @@
   <kbase name="kbase-errorhandling" packages="com.sample.errorhandling" />
   <kbase name="kbase-looping" packages="com.sample.looping" />
   <kbase name="kbase-timer" packages="com.sample.timer" />
-  
+  <kbase name="kbase-sendtask" packages="com.sample.sendtask" />
   
   
   <kbase name="kbase-servicetask" packages="com.sample.servicetask" >
