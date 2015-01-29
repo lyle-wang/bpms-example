@@ -29,7 +29,7 @@ salience 95
 no-loop  // Try to remove this no-loop ? You will be running into infinite loop, as update()/modify() triggers rule engine to re-evaluate
 when
 	
-	$person : Person(name == "Lyle")
+	$person : Person(name == "Lyle", age==40)
 then
 
 	modify ($person){
