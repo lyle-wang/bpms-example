@@ -1,0 +1,99 @@
+package com.sample.person;
+ 
+import com.sample.person.PersonTest.Person;
+ 
+ 
+ 
+ 
+rule "UpdateFact" 
+salience 100
+no-loop  // Try to remove this no-loop ? You will be running into infinite loop, as update()/modify() triggers rule engine to re-evaluate
+when
+	
+	$person : Person(name == "Lyle")
+then
+	$person.setAge(40);
+    
+	update ($person);
+
+	System.out.println("============ UpdateFact Fired ============");
+	System.out.println("  Updated Lyle's Age: "+$person.getAge()+" : ======");
+end
+ 
+
+
+
+
+rule "ModifyFact" 
+salience 95
+no-loop  // Try to remove this no-loop ? You will be running into infinite loop, as update()/modify() triggers rule engine to re-evaluate
+when
+	
+	$person : Person(name == "Lyle")
+then
+
+	modify ($person){
+		setAge(33),
+		setName("Lyle Wang")
+	};
+
+	System.out.println("============ ModifyFact Fired ============");
+	System.out.println("  Modified Lyle's Age(again): "+$person.getAge()+" : ======");
+	System.out.println("  Modified Lyle's Name: "+$person.getName()+" : ======");
+end
+
+ 
+ 
+ 
+ 
+ 
+rule "InsertNewFact" 
+salience 90
+//no-loop
+when
+	
+	eval(true)
+then
+	Person $newperson = new Person();
+	$newperson.setName("Lisa");
+    $newperson.setAge(31);
+    $newperson.setRoleName("Software Engineer In Test");
+    
+	insert($newperson);
+
+	System.out.println("============ InsertNewFact Fired ============");
+	System.out.println("  Inserted new fact:"+$newperson.getName()+" / "+$newperson.getAge()+" / "+$newperson.getRoleName() + " ======");
+end
+
+
+
+
+
+rule "CheckLisa" 
+//salience 85
+//no-loop
+when
+	
+	$person : Person()
+	eval( $person.getName().equals("Lisa")) 
+then
+
+	System.out.println("============ CheckInsertFact Fired ============");
+	System.out.println("  check Lisa: "+$person.getName()+" / "+$person.getAge()+" / "+$person.getRoleName() + " ======");
+end
+
+
+
+rule "CheckLyle" 
+//salience 85
+//no-loop
+when
+	
+	$person : Person()
+	eval( $person.getName().contains("Lyle")) 
+then
+
+	System.out.println("============ CheckInsertFact Fired ============");
+	System.out.println("  check Lyle: "+$person.getName()+" / "+$person.getAge()+" / "+$person.getRoleName() + " ======");
+end
+
