@@ -51,13 +51,13 @@ public class FluentAPITest {
 	    
 	    System.out.println("=== Starting Test with upgraded code ===");
 	    System.out.println("=== Following: https://github.com/droolsjbpm/jbpm/blob/master/jbpm-bpmn2/src/test/java/org/jbpm/bpmn2/ProcessFactoryTest.java ===");
-        System.out.println("=== Using public KIE API ===");
+	    System.out.println("=== Using public KIE API ===");
         
 	    exampleUsingPublicAPI();
 	}
 	
 	private static void exampleUsingPublicAPI() {
-        RuleFlowProcessFactory factory = RuleFlowProcessFactory.createProcess("org.jbpm.HelloWorld");
+	    RuleFlowProcessFactory factory = RuleFlowProcessFactory.createProcess("org.jbpm.HelloWorld");
 
         factory
 
