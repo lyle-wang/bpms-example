@@ -39,7 +39,7 @@ public class FluentAPITest {
 	    System.out.println("=== Following: http://docs.jboss.org/jbpm/v6.0/userguide/jBPMBPMN2.html#d0e3568 ===");
 	    System.out.println("=== Using deprecated and internal API ===");
 	    
-	    usingDeprecatedAndInternalAPI();
+	    exampleUsingDeprecatedAndInternalAPI();
 	    
 	    
 	    
@@ -53,10 +53,10 @@ public class FluentAPITest {
 	    System.out.println("=== Following: https://github.com/droolsjbpm/jbpm/blob/master/jbpm-bpmn2/src/test/java/org/jbpm/bpmn2/ProcessFactoryTest.java ===");
         System.out.println("=== Using public KIE API ===");
         
-	    usingPublicAPI();
+	    exampleUsingPublicAPI();
 	}
 	
-	private static void usingPublicAPI() {
+	private static void exampleUsingPublicAPI() {
         RuleFlowProcessFactory factory = RuleFlowProcessFactory.createProcess("org.jbpm.HelloWorld");
 
         factory
@@ -117,7 +117,7 @@ public class FluentAPITest {
 	
 	
 
-    private static void usingDeprecatedAndInternalAPI() {
+    private static void exampleUsingDeprecatedAndInternalAPI() {
         
         RuleFlowProcessFactory factory = RuleFlowProcessFactory.createProcess("org.jbpm.HelloWorld");
 
