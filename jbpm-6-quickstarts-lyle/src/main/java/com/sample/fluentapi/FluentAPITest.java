@@ -59,40 +59,39 @@ public class FluentAPITest {
 	private static void exampleUsingPublicAPI() {
 	    RuleFlowProcessFactory factory = RuleFlowProcessFactory.createProcess("org.jbpm.HelloWorld");
 
-        factory
+	    factory
 
-            // Header
-            .name("HelloWorldProcess")
-            .version("1.0")
-            .packageName("org.jbpm")
+	        // Header
+	        .name("HelloWorldProcess")
+	        .version("1.0")
+	        .packageName("org.jbpm")
 
-            // Nodes
-            .startNode(1).name("Start").done()
-            .actionNode(2).name("Action")
-                .action("java", "System.out.println(\"Hello World\");").done()
-            .endNode(3).name("End").done()
+	        // Nodes
+	        .startNode(1).name("Start").done()
+	        .actionNode(2).name("Action")
+	            .action("java", "System.out.println(\"Hello World\");").done()
+	            .endNode(3).name("End").done()
 
-            // Connections
-            .connection(1, 2)
-            .connection(2, 3);
+	        // Connections
+	        .connection(1, 2)
+	        .connection(2, 3);
 
-        RuleFlowProcess process = factory.validate().getProcess();
+	    RuleFlowProcess process = factory.validate().getProcess();
+            
+	    Resource res = ResourceFactory.newByteArrayResource(XmlBPMNProcessDumper.INSTANCE.dump(process).getBytes());
         
+	    // source path or target path must be set to be added into kbase
+	    res.setSourcePath("/tmp/FluentAPISample.bpmn2"); 
         
-        Resource res = ResourceFactory.newByteArrayResource(XmlBPMNProcessDumper.INSTANCE.dump(process).getBytes());
+	    KieBase kieBase = createKnowledgeBaseFromResources(res);
+	    KieSession ksession = kieBase.newKieSession();
         
-        // source path or target path must be set to be added into kbase
-        res.setSourcePath("/tmp/FluentAPISample.bpmn2"); 
-        
-        KieBase kieBase = createKnowledgeBaseFromResources(res);
-        KieSession ksession = kieBase.newKieSession();
-        
-        ksession.startProcess("org.jbpm.HelloWorld");
+	    ksession.startProcess("org.jbpm.HelloWorld");
 
-        ksession.dispose();
+	    ksession.dispose();
 	}
 	
-	protected static KieBase createKnowledgeBaseFromResources(Resource... process) {
+    protected static KieBase createKnowledgeBaseFromResources(Resource... process) {
         KieServices ks = KieServices.Factory.get();
         KieRepository kr = ks.getRepository();
         if (process.length > 0) {
@@ -100,20 +99,19 @@ public class FluentAPITest {
             for (Resource p : process) {
                 kfs.write(p);
             }
+            
             KieBuilder kb = ks.newKieBuilder(kfs);
-            kb.buildAll(); // kieModule is automatically deployed to
-                           // KieRepository
-            // if successfully built.
+            
+            // kieModule is automatically deployed to KieRepositoryif successfully built.
+            kb.buildAll(); 
             if (kb.getResults().hasMessages(Level.ERROR)) {
-                throw new RuntimeException("Build Errors:\n"
-                        + kb.getResults().toString());
+                throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
             }
         }
         KieContainer kContainer = ks.newKieContainer(kr.getDefaultReleaseId());
+        
         return kContainer.getKieBase();
     }
-	
-	
 	
 	
 
