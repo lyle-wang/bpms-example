@@ -12,7 +12,7 @@
 	<description>A sample jBPM Maven project</description>
 
 	<properties>
-		<jbpm.version>6.0.3-redhat-7</jbpm.version>
+		<jbpm.version>6.0.3-redhat-6</jbpm.version>
 		<httpcomponents.version>4.2.1-redhat-1</httpcomponents.version>
 		<resteasy.version>2.3.6.Final-redhat-1</resteasy.version>
 		<remotenaming.version>1.0.7.Final-redhat-1</remotenaming.version>
