@@ -1,0 +1,32 @@
+package com.sample.orderdiscount;
+ 
+ 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sample.orderdiscount.Order;
+import com.sample.orderdiscount.Item;
+ 
+ 
+ 
+rule "10% Discount" 
+no-loop  
+when
+	
+	$order : Order()
+	$item : Item (itemValue.compareTo(new BigDecimal("100.0"))  >  0) from $order.items
+	 
+then
+
+	System.out.println("Updating item: "+$item.getItemName()+" :  Value: "+$item.getItemValue().toString()+" : ======");
+	
+    $order.giveDiscount($item);
+	update ($order);
+	
+end
+ 
+
+
+
+

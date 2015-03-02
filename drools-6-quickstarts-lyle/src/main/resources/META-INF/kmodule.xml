@@ -3,4 +3,8 @@
     <kbase name="personrules" packages="com.sample.person">
         <ksession name="ksession-person"/>
     </kbase>
+    
+    <kbase name="orderdiscount" packages="com.sample.orderdiscount">
+        <ksession name="ksession-discount"/>
+    </kbase>
 </kmodule>
