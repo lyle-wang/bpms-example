@@ -16,6 +16,8 @@ when
 	
 	$order : Order()
 	$item : Item (itemValue.compareTo(new BigDecimal("100.0"))  >  0) from $order.items
+	
+
 	 
 then
 

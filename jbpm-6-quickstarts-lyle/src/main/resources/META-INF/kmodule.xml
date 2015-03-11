@@ -17,6 +17,7 @@
   <kbase name="kbase-timer" packages="com.sample.timer" />
   <kbase name="kbase-sendtask" packages="com.sample.sendtask" />
   
+  <kbase name="kbase-signal" packages="com.sample.signal" />
   
   <kbase name="kbase-servicetask" packages="com.sample.servicetask" >
     <ksession name="defaultWSKieSession" type="stateful" default="true" clockType="realtime" />

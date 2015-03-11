@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmn20="http://www.omg.org/bpmn20" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="_VaZ7gMbiEeSgANeG-oFFeg" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_2" structureRef="com.sample.signal.Item"/>
+  <bpmn2:signal id="usersigupdate" name="usersigupdate"/>
+  <bpmn2:signal id="usersigpass" name="usersigpass"/>
+  <bpmn2:process id="com.sample.signal.test" drools:version="1.0" drools:packageName="com.sample.signal" drools:adHoc="false" name="SignalTest" isExecutable="true">
+    <bpmn2:extensionElements>
+      <drools:import name="com.sample.signal.Item"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="testItem" itemSubjectRef="ItemDefinition_2"/>
+    <bpmn2:scriptTask id="_5C66AE8D-8D2F-4856-B924-F18EBD61CD5A" drools:selectable="true" name="PrintTask" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>bpmn20:_A309BBF7-7588-4F31-B4DF-CB7383C518C2</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_8356248A-65FF-4CCA-B08B-0D27B452F506</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;----------- In PrintItem -----------&quot;);
+System.out.println(&quot;testItem.getName():&quot;+testItem.getName());
+System.out.println(&quot;testItem.isHasError():&quot;+testItem.isHasError()+&quot;:&quot;);
+System.out.println(&quot;----------- Out PrintItem -----------&quot;);
+System.out.println(&quot; &quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:eventBasedGateway id="_832EA620-6E35-4420-82F0-0514711A0D34" drools:bgcolor="#f0e68c" drools:selectable="true" drools:bordercolor="#a67f00" name="WaitForSignal" gatewayDirection="Diverging" eventGatewayType="Parallel">
+      <bpmn2:incoming>bpmn20:_8356248A-65FF-4CCA-B08B-0D27B452F506</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_172B6826-7059-4709-84FD-6C849FC84E2D</bpmn2:outgoing>
+      <bpmn2:outgoing>bpmn20:_6171E134-6BD0-4771-8E52-6D5B059DA4B2</bpmn2:outgoing>
+    </bpmn2:eventBasedGateway>
+    <bpmn2:sequenceFlow id="_8356248A-65FF-4CCA-B08B-0D27B452F506" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_5C66AE8D-8D2F-4856-B924-F18EBD61CD5A" targetRef="_832EA620-6E35-4420-82F0-0514711A0D34"/>
+    <bpmn2:intermediateCatchEvent id="_A86A17AB-021E-4307-8A23-0694A959FBDC" drools:bgcolor="#f5deb3" drools:selectable="true" drools:bordercolor="#a0522d" drools:boundaryca="false" name="CatchUpdateSignal">
+      <bpmn2:incoming>bpmn20:_172B6826-7059-4709-84FD-6C849FC84E2D</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_662FBBD7-CF44-4E84-9708-63B13B2918D0</bpmn2:outgoing>
+      <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_2" name="Signal_2_Output"/>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+        <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+        <bpmn2:targetRef>testItem</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet id="OutputSet_1" name="Output Set 1">
+        <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:signalEventDefinition id="SignalEventDefinition_2" signalRef="usersigupdate"/>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:sequenceFlow id="_172B6826-7059-4709-84FD-6C849FC84E2D" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_832EA620-6E35-4420-82F0-0514711A0D34" targetRef="_A86A17AB-021E-4307-8A23-0694A959FBDC"/>
+    <bpmn2:intermediateCatchEvent id="_9B997B36-D93B-4984-9CF6-45B3B2BD9A11" drools:bgcolor="#f5deb3" drools:selectable="true" drools:bordercolor="#a0522d" drools:boundaryca="false" name="CatchPassSignal">
+      <bpmn2:incoming>bpmn20:_6171E134-6BD0-4771-8E52-6D5B059DA4B2</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_5D06B103-65CD-4467-87A3-EDD335D4D586</bpmn2:outgoing>
+      <bpmn2:dataOutput id="DataOutput_6" itemSubjectRef="ItemDefinition_2" name="Signal_3_Output"/>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_4">
+        <bpmn2:sourceRef>DataOutput_6</bpmn2:sourceRef>
+        <bpmn2:targetRef>testItem</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet id="OutputSet_2" name="Output Set 2">
+        <bpmn2:dataOutputRefs>DataOutput_6</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:signalEventDefinition id="SignalEventDefinition_3" signalRef="usersigpass"/>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:sequenceFlow id="_6171E134-6BD0-4771-8E52-6D5B059DA4B2" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_832EA620-6E35-4420-82F0-0514711A0D34" targetRef="_9B997B36-D93B-4984-9CF6-45B3B2BD9A11"/>
+    <bpmn2:endEvent id="_50437584-F082-4876-BA21-FA9908C67281" drools:bgcolor="#ff6347" drools:selectable="true" name="">
+      <bpmn2:incoming>bpmn20:_D1604CB3-5804-4532-AD41-47384F88C5FF</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:scriptTask id="_CD24AA45-E97F-44AE-ABBD-D3B5C1CDADE3" drools:selectable="true" name="logPass" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>bpmn20:_5D06B103-65CD-4467-87A3-EDD335D4D586</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_D1604CB3-5804-4532-AD41-47384F88C5FF</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;----------- User Signal - Pass -----------&quot;);
+System.out.println(&quot;testItem.getName():&quot;+testItem.getName());
+System.out.println(&quot;testItem.isHasError():&quot;+testItem.isHasError()+&quot;:&quot;);
+System.out.println(&quot;----------- Finished -----------&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_5D06B103-65CD-4467-87A3-EDD335D4D586" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_9B997B36-D93B-4984-9CF6-45B3B2BD9A11" targetRef="_CD24AA45-E97F-44AE-ABBD-D3B5C1CDADE3"/>
+    <bpmn2:sequenceFlow id="_D1604CB3-5804-4532-AD41-47384F88C5FF" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_CD24AA45-E97F-44AE-ABBD-D3B5C1CDADE3" targetRef="_50437584-F082-4876-BA21-FA9908C67281"/>
+    <bpmn2:scriptTask id="_ACE800A7-25EF-461F-8EB7-5F668AD374D7" drools:selectable="true" name="logUpdate" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>bpmn20:_662FBBD7-CF44-4E84-9708-63B13B2918D0</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_391A50B2-DBBD-4BC5-8A5E-162D9834D803</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;----------- User Signal - Update -----------&quot;);
+System.out.println(&quot;testItem.getName():&quot;+testItem.getName());
+System.out.println(&quot;testItem.isHasError():&quot;+testItem.isHasError()+&quot;:&quot;);
+System.out.println(&quot;&quot;);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_662FBBD7-CF44-4E84-9708-63B13B2918D0" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_A86A17AB-021E-4307-8A23-0694A959FBDC" targetRef="_ACE800A7-25EF-461F-8EB7-5F668AD374D7"/>
+    <bpmn2:sequenceFlow id="_391A50B2-DBBD-4BC5-8A5E-162D9834D803" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_ACE800A7-25EF-461F-8EB7-5F668AD374D7" targetRef="_19579E65-6F2D-4574-BA80-E74E2313328C"/>
+    <bpmn2:exclusiveGateway id="_19579E65-6F2D-4574-BA80-E74E2313328C" drools:bgcolor="#f0e68c" drools:selectable="true" drools:bordercolor="#a67f00" drools:dg="" name="" gatewayDirection="Converging">
+      <bpmn2:incoming>bpmn20:_391A50B2-DBBD-4BC5-8A5E-162D9834D803</bpmn2:incoming>
+      <bpmn2:incoming>bpmn20:SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>bpmn20:_A309BBF7-7588-4F31-B4DF-CB7383C518C2</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="_A309BBF7-7588-4F31-B4DF-CB7383C518C2" drools:priority="1" drools:bgcolor="#000000" drools:selectable="true" name="" sourceRef="_19579E65-6F2D-4574-BA80-E74E2313328C" targetRef="_5C66AE8D-8D2F-4856-B924-F18EBD61CD5A"/>
+    <bpmn2:startEvent id="processStartEvent" drools:bgcolor="#9acd32" drools:selectable="true" name="">
+      <bpmn2:outgoing>bpmn20:SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" drools:priority="1" name="" sourceRef="processStartEvent" targetRef="_19579E65-6F2D-4574-BA80-E74E2313328C"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_VaZ7hsbiEeSgANeG-oFFeg">
+    <bpmndi:BPMNPlane id="_VaZ7h8biEeSgANeG-oFFeg" bpmnElement="com.sample.signal.test">
+      <bpmndi:BPMNShape id="_VaZ7iMbiEeSgANeG-oFFeg" bpmnElement="processStartEvent">
+        <dc:Bounds height="30.0" width="30.0" x="103.0" y="280.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaailsbiEeSgANeG-oFFeg" bpmnElement="_5C66AE8D-8D2F-4856-B924-F18EBD61CD5A">
+        <dc:Bounds height="80.0" width="100.0" x="405.0" y="255.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaaimMbiEeSgANeG-oFFeg" bpmnElement="_832EA620-6E35-4420-82F0-0514711A0D34">
+        <dc:Bounds height="40.0" width="40.0" x="615.0" y="275.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaaimsbiEeSgANeG-oFFeg" bpmnElement="_A86A17AB-021E-4307-8A23-0694A959FBDC">
+        <dc:Bounds height="30.0" width="30.0" x="620.0" y="405.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaainMbiEeSgANeG-oFFeg" bpmnElement="_9B997B36-D93B-4984-9CF6-45B3B2BD9A11">
+        <dc:Bounds height="30.0" width="30.0" x="780.0" y="280.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaainsbiEeSgANeG-oFFeg" bpmnElement="_50437584-F082-4876-BA21-FA9908C67281">
+        <dc:Bounds height="28.0" width="28.0" x="1035.0" y="281.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_Vaain8biEeSgANeG-oFFeg" bpmnElement="_CD24AA45-E97F-44AE-ABBD-D3B5C1CDADE3">
+        <dc:Bounds height="80.0" width="100.0" x="870.0" y="255.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaaiosbiEeSgANeG-oFFeg" bpmnElement="_ACE800A7-25EF-461F-8EB7-5F668AD374D7">
+        <dc:Bounds height="80.0" width="100.0" x="585.0" y="510.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_VaaipcbiEeSgANeG-oFFeg" bpmnElement="_19579E65-6F2D-4574-BA80-E74E2313328C">
+        <dc:Bounds height="40.0" width="40.0" x="240.0" y="275.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_VaaimcbiEeSgANeG-oFFeg" bpmnElement="_8356248A-65FF-4CCA-B08B-0D27B452F506" sourceElement="_VaailsbiEeSgANeG-oFFeg" targetElement="_VaaimMbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="455.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_Vaaim8biEeSgANeG-oFFeg" bpmnElement="_172B6826-7059-4709-84FD-6C849FC84E2D" sourceElement="_VaaimMbiEeSgANeG-oFFeg" targetElement="_VaaimsbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="420.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_VaaincbiEeSgANeG-oFFeg" bpmnElement="_6171E134-6BD0-4771-8E52-6D5B059DA4B2" sourceElement="_VaaimMbiEeSgANeG-oFFeg" targetElement="_VaainMbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="795.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_VaaioMbiEeSgANeG-oFFeg" bpmnElement="_5D06B103-65CD-4467-87A3-EDD335D4D586" sourceElement="_VaainMbiEeSgANeG-oFFeg" targetElement="_Vaain8biEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="795.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="920.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_VaaiocbiEeSgANeG-oFFeg" bpmnElement="_D1604CB3-5804-4532-AD41-47384F88C5FF" sourceElement="_Vaain8biEeSgANeG-oFFeg" targetElement="_VaainsbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="920.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1049.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_Vaaio8biEeSgANeG-oFFeg" bpmnElement="_662FBBD7-CF44-4E84-9708-63B13B2918D0" sourceElement="_VaaimsbiEeSgANeG-oFFeg" targetElement="_VaaiosbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="420.0"/>
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="550.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_VaaipMbiEeSgANeG-oFFeg" bpmnElement="_391A50B2-DBBD-4BC5-8A5E-162D9834D803" sourceElement="_VaaiosbiEeSgANeG-oFFeg" targetElement="_VaaipcbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="635.0" y="550.0"/>
+        <di:waypoint xsi:type="dc:Point" x="263.0" y="550.0"/>
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_VaaipsbiEeSgANeG-oFFeg" bpmnElement="_A309BBF7-7588-4F31-B4DF-CB7383C518C2" sourceElement="_VaaipcbiEeSgANeG-oFFeg" targetElement="_VaailsbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="455.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_VaZ7iMbiEeSgANeG-oFFeg" targetElement="_VaaipcbiEeSgANeG-oFFeg">
+        <di:waypoint xsi:type="dc:Point" x="133.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="220.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="220.0" y="295.0"/>
+        <di:waypoint xsi:type="dc:Point" x="240.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

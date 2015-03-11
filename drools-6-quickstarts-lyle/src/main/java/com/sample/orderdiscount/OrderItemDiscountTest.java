@@ -20,7 +20,6 @@ public class OrderItemDiscountTest {
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-discount");
-
         	
         	
         	Order order = new Order();
